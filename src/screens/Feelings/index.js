@@ -1,13 +1,21 @@
 import React from 'react';
-import {
-  View, Text, Button,
-} from 'react-native';
+import { View } from 'react-native';
+import FeelingItem from './components/FeelingItem';
 
 
-const Feelings = ({ navigation }) => (
-  <View>
-    <Text>Feelings</Text>
-    <Button title="My feeling" onPress={() => { navigation.navigate('MyFeeling'); }} />
+const Feelings = () => (
+  <View style={{
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  }}
+  >
+    <FeelingItem icon="😇" value="peace" />
+    <FeelingItem icon="😃" value="happy" />
+    <FeelingItem icon="🤣" value="funny" />
+    <FeelingItem icon="😂" value="very very funny" />
+    <FeelingItem icon="🤣" value="funny" />
+    <FeelingItem icon="🤣" value="funny" />
+    <FeelingItem icon="🤯" value="find my place" />
   </View>
 );
 
