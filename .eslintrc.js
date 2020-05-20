@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     es6: true,
+    "jest": true
   },
   extends: [
     'plugin:react/recommended',
@@ -18,11 +19,10 @@ module.exports = {
     'react',
   ],
   rules: {
-    'prettier/prettier': 'error',
     'react/jsx-filename-extension': [
       'warn',
       {
-        extensions: ['.jsx', '.js'],
+        extensions: ['.js'],
       },
     ],
     'import/prefer-default-export': 'off',
