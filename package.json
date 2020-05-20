@@ -9,9 +9,20 @@
     "test": "jest",
     "lint": "eslint ."
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint"
+    ]
+  },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.4.0",
+    "@react-navigation/stack": "^5.3.7",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
@@ -24,14 +35,17 @@
     "@babel/runtime": "^7.9.6",
     "@react-native-community/eslint-config": "^1.1.0",
     "babel-jest": "^26.0.1",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^2.5.1",
+    "husky": "^4.2.5",
     "jest": "^26.0.1",
+    "lint-staged": "^10.2.4",
     "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.0.5",
     "react-test-renderer": "16.11.0"
   },
   "jest": {
