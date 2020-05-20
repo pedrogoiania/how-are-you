@@ -1,22 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import { View, Text } from 'react-native';
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
+import Navigation from './navigation';
 
-const App = () => (
-  <NavigationContainer>
-    <View>
-      <Text>Opa</Text>
-    </View>
-  </NavigationContainer>
-);
+const App = () => <Navigation />;
 
 export default App;
