@@ -38,8 +38,6 @@ const FeelingItem = ({
     };
 
     if (position >= 0 && position + dynamicWidth <= Dimensions.get('window')[directions[axis]]) {
-      console.log('caiu aqui');
-
       return position;
     }
 
