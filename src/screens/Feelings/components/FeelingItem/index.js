@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-const FeelingItem = ({ icon, value }) => {
+const FeelingItem = ({ icon, value, onPress }) => {
   const [dynamicWidth, setDynamicWidth] = useState(0);
 
   const onLayout = ({ nativeEvent }) => {
@@ -11,8 +11,10 @@ const FeelingItem = ({ icon, value }) => {
   };
 
   return (
-    <View
+    <TouchableOpacity
       onLayout={onLayout}
+      onPress={onPress}
+      activeOpacity={0.6}
       style={{
         backgroundColor: 'rgb(133,88,244)',
         alignItems: 'center',
@@ -25,7 +27,7 @@ const FeelingItem = ({ icon, value }) => {
     >
       <Text>{icon}</Text>
       <Text style={{ color: 'white' }}>{value}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

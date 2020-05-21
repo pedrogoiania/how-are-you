@@ -29,7 +29,7 @@ const values = [
 ];
 
 
-const Feelings = () => (
+const Feelings = ({ onFeelingPressed }) => (
   <FlatList
     style={{
       paddingTop: 20,
@@ -48,7 +48,7 @@ const Feelings = () => (
       {
         item: { value, icon },
       },
-    ) => <FeelingItem icon={icon} value={value} />}
+    ) => <FeelingItem icon={icon} value={value} onPress={onFeelingPressed} />}
   />
 );
 
