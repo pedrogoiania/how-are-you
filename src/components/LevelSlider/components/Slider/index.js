@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, Dimensions } from 'react-native';
+
+import { SvgXml } from 'react-native-svg';
 
 import {
   PanGestureHandler,
@@ -8,27 +10,25 @@ import {
 
 import { LevelSliderContext } from '../../contexts/LevelSlider/LevelSliderState';
 
-const externalCircleSize = 70;
-const MIN_HORIZONTAL_POSITION = 5;
-const MAX_HORIZONTAL_POSITION = 320;
+import sliderIcon from '../../../../assets/icons/slider-icon';
+
+const MIN_HORIZONTAL_POSITION = Dimensions.get('window').width * 0.01;
+const MAX_HORIZONTAL_POSITION = Dimensions.get('window').width * 0.95;
+const INITIAL_HORIZONTAL_POSITION = Dimensions.get('window').width * 0.01;
 
 const Circle = () => (
   <Animated.View
     style={{
-      height: externalCircleSize,
-      width: externalCircleSize,
-      borderRadius: externalCircleSize,
-      backgroundColor: 'rgb(119,75,227)',
+      height: 80,
+      width: 80,
       justifyContent: 'center',
       alignItems: 'center',
     }}
   >
-    <Animated.View style={{
-      height: 40,
-      width: 40,
-      borderRadius: 40,
-      backgroundColor: 'white',
-    }}
+    <SvgXml
+      width="100%"
+      height="100%"
+      xml={sliderIcon}
     />
   </Animated.View>
 );
@@ -36,7 +36,7 @@ const Circle = () => (
 const Slider = () => {
   const { dispatch, state: { height } } = useContext(LevelSliderContext);
   const [horizontalPosition, setHorizontalPosition] = useState(undefined);
-  const [actualHorizontalPosition, setActualHorizontalPosition] = useState(0);
+  const [actualHorizontalPosition, setActualHorizontalPosition] = useState(INITIAL_HORIZONTAL_POSITION);
 
   const dispatchHorizontalPosition = (payload) => {
     dispatch({

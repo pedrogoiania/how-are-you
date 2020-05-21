@@ -8,6 +8,9 @@ const PercentValues = () => {
   const onLayout = ({ nativeEvent }) => {
     const { layout } = nativeEvent;
     const { height } = layout;
+
+    console.log('layout', layout);
+
     setTop(Number(height) * -1);
   };
 
