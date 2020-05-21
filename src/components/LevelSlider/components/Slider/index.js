@@ -9,6 +9,8 @@ import {
 import { LevelSliderContext } from '../../contexts/LevelSlider/LevelSliderState';
 
 const externalCircleSize = 70;
+const MIN_HORIZONTAL_POSITION = 5;
+const MAX_HORIZONTAL_POSITION = 320;
 
 const Circle = () => (
   <Animated.View
@@ -33,20 +35,54 @@ const Circle = () => (
 );
 
 const Slider = () => {
-  const { state: { height } } = useContext(LevelSliderContext);
+  const { dispatch, state: { height } } = useContext(LevelSliderContext);
   const [horizontalPosition, setHorizontalPosition] = useState(undefined);
   const [actualHorizontalPosition, setActualHorizontalPosition] = useState(0);
 
+  const dispatchHorizontalPosition = (payload) => {
+    dispatch({
+      type: 'SLIDER_POSITION',
+      payload,
+    });
+  };
+
+  const checkHorizontalLimit = (horizontalPositionValue) => {
+    if (
+      horizontalPositionValue >= MIN_HORIZONTAL_POSITION
+      && horizontalPositionValue < MAX_HORIZONTAL_POSITION
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
   const onGestureEvent = ({ nativeEvent }) => {
     const { translationX } = nativeEvent;
-    setHorizontalPosition(translationX + actualHorizontalPosition);
+
+    const horizontalPositionValue = translationX + actualHorizontalPosition;
+
+    const inHorizontalLimit = checkHorizontalLimit(horizontalPositionValue);
+
+    if (inHorizontalLimit) {
+      setHorizontalPosition(horizontalPositionValue);
+      dispatchHorizontalPosition(horizontalPositionValue);
+    }
   };
 
   const onHandlerStateChange = ({ nativeEvent }) => {
     const { translationX, state } = nativeEvent;
     if (state === State.END) {
-      setHorizontalPosition(undefined);
-      setActualHorizontalPosition(translationX + actualHorizontalPosition);
+      const inHorizontalLimit = checkHorizontalLimit(horizontalPosition);
+
+      if (inHorizontalLimit) {
+        setHorizontalPosition(undefined);
+
+        const horizontalPositionValue = translationX + actualHorizontalPosition;
+
+        setActualHorizontalPosition(horizontalPositionValue);
+        dispatchHorizontalPosition(horizontalPositionValue);
+      }
     }
   };
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+
+import PercentValueItem from './PercentValueItem';
 
 const PercentValues = () => {
   const [top, setTop] = useState(0);
@@ -7,6 +9,16 @@ const PercentValues = () => {
     const { layout } = nativeEvent;
     const { height } = layout;
     setTop(Number(height) * -1);
+  };
+
+  const renderItems = () => {
+    const items = [];
+
+    for (let i = 0; i <= 100; i += 25) {
+      items.push(<PercentValueItem value={i} />);
+    }
+
+    return items;
   };
 
   return (
@@ -19,21 +31,10 @@ const PercentValues = () => {
         top,
       }}
     >
-      <View style={{ alignItems: 'center', backgroundColor: 'blue' }}>
-        <Text style={{ textAlign: 'center' }}>0%</Text>
-      </View>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={{ textAlign: 'center' }}>25%</Text>
-      </View>
-      <View style={{ alignItems: 'center', backgroundColor: 'blue' }}>
-        <Text style={{ textAlign: 'center' }}>50%</Text>
-      </View>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={{ textAlign: 'center' }}>75%</Text>
-      </View>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={{ textAlign: 'center' }}>100%</Text>
-      </View>
+
+      {
+        renderItems()
+      }
     </View>
   );
 };
