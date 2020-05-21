@@ -3,10 +3,12 @@ import { View, Text } from 'react-native';
 
 import { LevelSliderContext } from '../../contexts/LevelSlider/LevelSliderState';
 
+const DEFAULT_VERTICAL_POSITION = 15;
+
 const PercentValueItem = ({ value }) => {
   const { state: { sliderPosition } } = useContext(LevelSliderContext);
   const [horizontalPosition, setHorizontalPosition] = useState({ x0: value, x1: value });
-  const [verticalPosition, setVerticalPosition] = useState(0);
+  const [verticalPosition, setVerticalPosition] = useState(DEFAULT_VERTICAL_POSITION);
 
   const verifySliderInsideValue = () => {
     const { x0, x1 } = horizontalPosition;
@@ -21,12 +23,12 @@ const PercentValueItem = ({ value }) => {
   useEffect(() => {
     const sliderInsideItem = verifySliderInsideValue();
 
-    if (verticalPosition === 0 && sliderInsideItem) {
-      setVerticalPosition(35);
+    if (verticalPosition === DEFAULT_VERTICAL_POSITION && sliderInsideItem) {
+      setVerticalPosition(45);
     }
 
-    if (verticalPosition > 0 && !sliderInsideItem) {
-      setVerticalPosition(0);
+    if (verticalPosition > DEFAULT_VERTICAL_POSITION && !sliderInsideItem) {
+      setVerticalPosition(DEFAULT_VERTICAL_POSITION);
     }
   }, [sliderPosition]);
 
@@ -46,12 +48,11 @@ const PercentValueItem = ({ value }) => {
     <View
       onLayout={onLayout}
       style={{
-        backgroundColor: 'blue',
         paddingHorizontal: 20,
         bottom: verticalPosition,
       }}
     >
-      <Text style={{ textAlign: 'center' }}>{`${value}%`}</Text>
+      <Text style={{ textAlign: 'center', fontSize: 15 }}>{`${value}%`}</Text>
     </View>
   );
 };

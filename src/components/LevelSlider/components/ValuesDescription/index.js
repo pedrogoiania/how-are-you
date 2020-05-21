@@ -1,6 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import ValueDescriptionItem from './ValueDescriptionItem';
 
+const values = [
+  'Slightily',
+  'A little',
+  'Fairly',
+  'Very',
+  'Extremely',
+];
+
+const renderValues = () => values.map((item) => (<ValueDescriptionItem key={item} value={item} />));
 
 const ValuesDescriptions = () => (
   <View
@@ -9,21 +19,7 @@ const ValuesDescriptions = () => (
       justifyContent: 'space-around',
     }}
   >
-    <View style={{ justifyContent: 'center' }}>
-      <Text>Slightily</Text>
-    </View>
-    <View style={{ justifyContent: 'center' }}>
-      <Text>A little</Text>
-    </View>
-    <View style={{ justifyContent: 'center' }}>
-      <Text>Fairly</Text>
-    </View>
-    <View style={{ justifyContent: 'center' }}>
-      <Text>Very</Text>
-    </View>
-    <View style={{ justifyContent: 'center' }}>
-      <Text>Extremely</Text>
-    </View>
+    {renderValues()}
   </View>
 );
 

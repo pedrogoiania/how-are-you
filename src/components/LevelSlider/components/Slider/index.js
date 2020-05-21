@@ -18,8 +18,7 @@ const Circle = () => (
       height: externalCircleSize,
       width: externalCircleSize,
       borderRadius: externalCircleSize,
-      //   backgroundColor: 'rgb(119,75,227)',
-      backgroundColor: 'gray',
+      backgroundColor: 'rgb(119,75,227)',
       justifyContent: 'center',
       alignItems: 'center',
     }}
