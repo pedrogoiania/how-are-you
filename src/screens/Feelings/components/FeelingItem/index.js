@@ -10,10 +10,15 @@ const FeelingItem = ({ icon, value, onPress }) => {
     setDynamicWidth(width);
   };
 
+  const handleOnPress = () => {
+    const feeling = { icon, value };
+    onPress(feeling);
+  };
+
   return (
     <TouchableOpacity
       onLayout={onLayout}
-      onPress={onPress}
+      onPress={handleOnPress}
       activeOpacity={0.6}
       style={{
         backgroundColor: 'rgb(133,88,244)',
