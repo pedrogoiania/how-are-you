@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
+import PrimaryText from '../../../../components/Texts/PrimaryText';
+
+import styles from './styles';
+
 const FeelingItem = ({ icon, value, onPress }) => {
   const [dynamicWidth, setDynamicWidth] = useState(0);
 
@@ -20,18 +24,13 @@ const FeelingItem = ({ icon, value, onPress }) => {
       onLayout={onLayout}
       onPress={handleOnPress}
       activeOpacity={0.6}
-      style={{
-        backgroundColor: 'rgb(133,88,244)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 10,
-        minWidth: 64,
+      style={[styles.itemContainer, {
         height: dynamicWidth,
         borderRadius: dynamicWidth / 2,
-      }}
+      }]}
     >
-      <Text>{icon}</Text>
-      <Text style={{ color: 'white' }}>{value}</Text>
+      <Text style={styles.itemIcon}>{icon}</Text>
+      <PrimaryText style={styles.itemValue}>{value}</PrimaryText>
     </TouchableOpacity>
   );
 };

@@ -12,19 +12,14 @@ import { LevelSliderContext } from '../../contexts/LevelSlider/LevelSliderState'
 
 import sliderIcon from '../../../../assets/icons/slider-icon';
 
+import styles from './styles';
+
 const MIN_HORIZONTAL_POSITION = Dimensions.get('window').width * 0.01;
 const MAX_HORIZONTAL_POSITION = Dimensions.get('window').width * 0.95;
 const INITIAL_HORIZONTAL_POSITION = Dimensions.get('window').width * 0.01;
 
 const Circle = () => (
-  <Animated.View
-    style={{
-      height: 80,
-      width: 80,
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
+  <Animated.View style={styles.circleContainer}>
     <SvgXml
       width="100%"
       height="100%"
@@ -36,7 +31,10 @@ const Circle = () => (
 const Slider = () => {
   const { dispatch, state: { height } } = useContext(LevelSliderContext);
   const [horizontalPosition, setHorizontalPosition] = useState(undefined);
-  const [actualHorizontalPosition, setActualHorizontalPosition] = useState(INITIAL_HORIZONTAL_POSITION);
+  const [
+    actualHorizontalPosition,
+    setActualHorizontalPosition,
+  ] = useState(INITIAL_HORIZONTAL_POSITION);
 
   const dispatchHorizontalPosition = (payload) => {
     dispatch({

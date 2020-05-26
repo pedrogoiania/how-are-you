@@ -1,7 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import { LevelSliderContext } from '../../contexts/LevelSlider/LevelSliderState';
+
+import PrimaryText from '../../../Texts/PrimaryText';
+
+import styles from './styles';
 
 const AnimatedValue = ({
   value,
@@ -14,6 +18,7 @@ const AnimatedValue = ({
   const { state: { sliderPosition } } = useContext(LevelSliderContext);
   const [horizontalPosition, setHorizontalPosition] = useState({ x0: value, x1: value });
   const [verticalPosition, setVerticalPosition] = useState(defaultVerticalPosition);
+  const [dynamicStyle, setDynamicStyle] = useState({ top: defaultVerticalPosition });
 
   const verifySliderInsideValue = () => {
     const { x0, x1 } = horizontalPosition;
@@ -43,10 +48,12 @@ const AnimatedValue = ({
 
     if (positionToTest === defaultVerticalPositionToTest && sliderInsideItem) {
       setVerticalPosition(selectedPositionValue);
+      setDynamicStyle({ ...dynamicStyle, top: selectedPositionValue });
     }
 
     if (positionToTest > defaultVerticalPositionToTest && !sliderInsideItem) {
       setVerticalPosition(defaultVerticalPosition);
+      setDynamicStyle({ ...dynamicStyle, top: defaultVerticalPosition });
     }
   }, [sliderPosition]);
 
@@ -65,12 +72,13 @@ const AnimatedValue = ({
   return (
     <View
       onLayout={onLayout}
-      style={[{
-        alignItems: 'center',
-        top: verticalPosition,
-      }, valueWrapperStyle]}
+      style={[
+        dynamicStyle,
+        styles.itemContainer,
+        valueWrapperStyle,
+      ]}
     >
-      <Text style={{ color: valueColor }}>{value}</Text>
+      <PrimaryText style={{ color: valueColor, fontSize: 16 }}>{value}</PrimaryText>
     </View>
   );
 };

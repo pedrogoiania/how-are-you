@@ -7,48 +7,39 @@ import { GET_FEELINGS } from './index.graphql';
 
 import FeelingItem from '../FeelingItem';
 
+import styles from './styles';
+
 
 const Feelings = ({ onFeelingPressed }) => {
   const { loading, data } = useQuery(GET_FEELINGS);
 
   if (loading) {
     return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: 'rgb(119,75,227)',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Text style={{ color: 'white' }}>Loading...</Text>
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
 
+  const renderItem = ({ item: { title, icon } }) => (
+    <FeelingItem
+      icon={icon}
+      value={title}
+      onPress={onFeelingPressed}
+    />
+  );
+
   if (data) {
     return (
       <FlatList
-        style={{
-          paddingTop: 20,
-          backgroundColor: 'rgb(119,75,227)',
-        }}
+        style={styles.listContainer}
         numColumns={4}
-        columnWrapperStyle={{
-          flexWrap: 'wrap',
-          justifyContent: 'space-around',
-          alignItems: 'flex-start',
-          paddingVertical: 8,
-        }}
+        columnWrapperStyle={styles.listColumnContainer}
         refreshing={loading}
         extraData={data.getAllFeelings}
         data={data.getAllFeelings}
         keyExtractor={({ title }) => title}
-        renderItem={(
-          {
-            item: { title, icon },
-          },
-        ) => <FeelingItem icon={icon} value={title} onPress={onFeelingPressed} />}
+        renderItem={renderItem}
       />
     );
   }

@@ -1,22 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+
+import PrimaryText from '../../../../components/Texts/PrimaryText';
+
+import styles from './styles';
 
 const FeelingDescription = ({ feeling }) => {
   const text = 'I\'m feeling';
   const text2 = 'Choose the intensity of your feeling';
 
   return (
-    <View style={{
-      flex: 5,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'white',
-    }}
-    >
-      <Text style={{ fontSize: 40 }}>{feeling.icon}</Text>
-      <Text style={{ fontSize: 40 }}>{text}</Text>
-      <Text style={{ fontSize: 40, color: 'rgb(133,88,244)' }}>{feeling.value}</Text>
-      <Text style={{ paddingVertical: 20, color: 'gray' }}>{text2}</Text>
+    <View style={styles.feelingContainer}>
+      <PrimaryText style={styles.feelingIcon}>{feeling.icon}</PrimaryText>
+      <PrimaryText style={styles.feelingText}>{text}</PrimaryText>
+      <PrimaryText style={styles.feelingValue}>{feeling.value}</PrimaryText>
+      <PrimaryText style={styles.feelingMessage}>{text2}</PrimaryText>
     </View>
   );
 };
