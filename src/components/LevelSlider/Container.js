@@ -7,13 +7,14 @@ import { LevelSliderContext } from './contexts/LevelSlider/LevelSliderState';
 import AnimatedValues from './components/AnimatedValues';
 
 import styles from './styles';
+import strings from '../../strings';
 
 const descriptionValues = [
-  'Slightily',
-  'A little',
-  'Fairly',
-  'Very',
-  'Extremely',
+  strings.slightily,
+  strings.a_little,
+  strings.fairly,
+  strings.very,
+  strings.extremely,
 ];
 
 const percentValues = [

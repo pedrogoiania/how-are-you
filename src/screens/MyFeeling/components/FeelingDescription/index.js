@@ -5,9 +5,11 @@ import PrimaryText from '../../../../components/Texts/PrimaryText';
 
 import styles from './styles';
 
+import strings from '../../../../strings';
+
 const FeelingDescription = ({ feeling }) => {
-  const text = 'I\'m feeling';
-  const text2 = 'Choose the intensity of your feeling';
+  const text = strings.im_feeling;
+  const text2 = strings.choose_intensity;
 
   return (
     <View style={styles.feelingContainer}>
