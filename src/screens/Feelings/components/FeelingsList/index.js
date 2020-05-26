@@ -9,7 +9,7 @@ import FeelingItem from '../FeelingItem';
 
 
 const Feelings = ({ onFeelingPressed }) => {
-  const { loading, error, data } = useQuery(GET_FEELINGS);
+  const { loading, data } = useQuery(GET_FEELINGS);
 
   if (loading) {
     return (
@@ -24,10 +24,6 @@ const Feelings = ({ onFeelingPressed }) => {
         <Text style={{ color: 'white' }}>Loading...</Text>
       </View>
     );
-  }
-
-  if (error) {
-    console.log(error);
   }
 
   if (data) {

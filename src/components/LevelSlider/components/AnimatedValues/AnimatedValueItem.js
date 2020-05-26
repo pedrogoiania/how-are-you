@@ -32,7 +32,6 @@ const AnimatedValue = ({
     let defaultVerticalPositionToTest = defaultVerticalPosition;
 
     if (direction === 'up') {
-      console.log('direction', direction);
       if (positionToTest < 0) {
         positionToTest *= -1;
       }

@@ -1,5 +1,7 @@
+import { getBestLanguageAvailable } from '../utils/locales';
+
 const headers = {
-  'accept-language': 'pt-BR',
+  'accept-language': getBestLanguageAvailable(),
 };
 
 export default headers;
