@@ -1,55 +1,63 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View, Text } from 'react-native';
+
+import { useQuery } from '@apollo/react-hooks';
+
+import { GET_FEELINGS } from './index.graphql';
+
 import FeelingItem from '../FeelingItem';
 
-const values = [
-  { value: 'happy', icon: '😊' },
-  { value: 'confident', icon: '😍' },
-  { value: 'proud', icon: '😎' },
-  { value: 'greatful', icon: '😇' },
-  { value: 'numb', icon: '😐' },
-  { value: 'angry', icon: '😠' },
-  { value: 'bored', icon: '🙁' },
-  { value: 'joyful', icon: '🤗' },
-  { value: 'optimistic', icon: '😃' },
-  { value: 'okay', icon: '🙆‍♂️' },
-  { value: 'depressed', icon: '😢' },
-  { value: 'wicked', icon: '😈' },
-  { value: 'excited', icon: '😄' },
-  { value: 'anxious', icon: '😰' },
-  { value: 'stressed', icon: '🤒' },
-  { value: 'tired', icon: '😩' },
-  { value: 'ashamed', icon: '😳' },
-  { value: 'insecure', icon: '😞' },
-  { value: 'sad', icon: '😥' },
-  { value: 'envious', icon: '😏' },
-  { value: 'disgusted', icon: '🤢' },
-  { value: 'friendly', icon: '🙂' },
-  { value: 'positive', icon: '👌' },
-];
 
+const Feelings = ({ onFeelingPressed }) => {
+  const { loading, error, data } = useQuery(GET_FEELINGS);
 
-const Feelings = ({ onFeelingPressed }) => (
-  <FlatList
-    style={{
-      paddingTop: 20,
-      backgroundColor: 'rgb(119,75,227)',
-    }}
-    numColumns={4}
-    columnWrapperStyle={{
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      alignItems: 'flex-start',
-      paddingVertical: 8,
-    }}
-    data={values}
-    keyExtractor={({ value }) => value}
-    renderItem={(
-      {
-        item: { value, icon },
-      },
-    ) => <FeelingItem icon={icon} value={value} onPress={onFeelingPressed} />}
-  />
-);
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'rgb(119,75,227)',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text style={{ color: 'white' }}>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (data) {
+    return (
+      <FlatList
+        style={{
+          paddingTop: 20,
+          backgroundColor: 'rgb(119,75,227)',
+        }}
+        numColumns={4}
+        columnWrapperStyle={{
+          flexWrap: 'wrap',
+          justifyContent: 'space-around',
+          alignItems: 'flex-start',
+          paddingVertical: 8,
+        }}
+        refreshing={loading}
+        extraData={data.getAllFeelings}
+        data={data.getAllFeelings}
+        keyExtractor={({ title }) => title}
+        renderItem={(
+          {
+            item: { title, icon },
+          },
+        ) => <FeelingItem icon={icon} value={title} onPress={onFeelingPressed} />}
+      />
+    );
+  }
+
+  return null;
+};
 
 export default Feelings;
