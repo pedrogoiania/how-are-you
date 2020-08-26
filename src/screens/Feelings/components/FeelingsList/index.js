@@ -9,7 +9,6 @@ import FeelingItem from '../FeelingItem';
 
 import styles from './styles';
 
-
 const Feelings = ({ onFeelingPressed }) => {
   const { loading, data } = useQuery(GET_FEELINGS);
 
@@ -21,15 +20,16 @@ const Feelings = ({ onFeelingPressed }) => {
     );
   }
 
-  const renderItem = ({ item: { title, icon } }) => (
+  const renderItem = ({ item: feeling }) => (
     <FeelingItem
-      icon={icon}
-      value={title}
+      feeling={feeling}
       onPress={onFeelingPressed}
     />
   );
 
   if (data) {
+    console.log(data);
+
     return (
       <FlatList
         style={styles.listContainer}

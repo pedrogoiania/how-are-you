@@ -14,6 +14,9 @@ const FeelingDescription = ({ feeling }) => {
   return (
     <View style={styles.feelingContainer}>
       <PrimaryText style={styles.feelingIcon}>{feeling.icon}</PrimaryText>
+      <PrimaryText style={styles.feelingText}>
+        {feeling.description}
+      </PrimaryText>
       <PrimaryText style={styles.feelingText}>{text}</PrimaryText>
       <PrimaryText style={styles.feelingValue}>{feeling.value}</PrimaryText>
       <PrimaryText style={styles.feelingMessage}>{text2}</PrimaryText>

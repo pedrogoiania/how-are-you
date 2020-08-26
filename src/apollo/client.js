@@ -1,4 +1,3 @@
-
 import ApolloClient from 'apollo-boost';
 
 import headers from './headers';

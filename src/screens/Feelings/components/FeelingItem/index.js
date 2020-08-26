@@ -5,8 +5,10 @@ import PrimaryText from '../../../../components/Texts/PrimaryText';
 
 import styles from './styles';
 
-const FeelingItem = ({ icon, value, onPress }) => {
+const FeelingItem = ({ feeling, onPress }) => {
   const [dynamicWidth, setDynamicWidth] = useState(0);
+
+  const { icon, title: value } = feeling;
 
   const onLayout = ({ nativeEvent }) => {
     const { layout } = nativeEvent;
@@ -15,7 +17,6 @@ const FeelingItem = ({ icon, value, onPress }) => {
   };
 
   const handleOnPress = () => {
-    const feeling = { icon, value };
     onPress(feeling);
   };
 
